@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff; /* Fondo blanco */
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        button {
+            font-size: 20px; /* Aumentado el tamaño del texto */
+            padding: 15px 30px; /* Aumentado el tamaño del botón */
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 10px; /* Aumentado el radio de borde */
+        }
+
+        #si {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+        }
+
+        #no {
+            background-color: #FF6B6B; /* Rojo */
+            color: white;
+        }
+
+        #no:hover {
+            background-color: #EF4444; /* Rojo más claro al hacer hover */
+        }
+
+        #mensaje {
+            display: none;
+            color: #333333;
+            margin-top: 20px;
+        }
+
+        #gif {
+            max-width: 30%; /* Reducido al 30% del ancho original */
+            height: auto;
+            margin-top: -50px; /* Ajuste para la posición del GIF */
+            border-radius: 10px; /* Bordes redondeados para el GIF */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img id="gif" src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="GIF de oso de peluche con rosas">
+    <h1 id="pregunta">¿Quieres ser mi San Valentín?</h1>
+    <button id="si" onclick="cambiarGif()">Sí</button>
+    <button id="no" onclick="cambiarTexto()">No</button>
+    <div id="mensaje"></div>
+</div>
+
+<audio id="musica" autoplay>
+    <!-- Fuente de YouTube para "Thinking Out Loud" de Ed Sheeran -->
+    <source src="https://www.youtube.com/embed/lp-EO5I60KA?autoplay=1" type="audio/mp3">
+    Tu navegador no soporta la etiqueta de audio.
+</audio>
+
+<script>
+    var textosNo = [
+        "¿Segura?",
+        "¿Muy segura?",
+        "¿Segurísima?",
+        "¿DEVERDAD?",
+        "¿DEVERDACITO?",
+        "¿No me quieres, no?",
+        "Bueno, dejare de insistir...",
+        "Bromita, di que sí por favor",
+        "DI QUE SI PES",
+        "BUENO uWu"
+    ];
+
+    var indiceTextoNo = 0;
+
+    function cambiarTexto() {
+        var botonNo = document.getElementById('no');
+        botonNo.textContent = textosNo[indiceTextoNo];
+        indiceTextoNo = (indiceTextoNo + 1) % textosNo.length;
+        hacerMasGrande();
+    }
+
+    function hacerMasGrande() {
+        var botonSi = document.getElementById('si');
+        var tamanoActual = window.getComputedStyle(botonSi).fontSize;
+        var nuevoTamano = parseInt(tamanoActual) + 20 + 'px';
+        botonSi.style.fontSize = nuevoTamano;
+    }
+
+    function cambiarGif() {
+        document.getElementById('gif').src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+        mostrarMensaje();
+    }
+
+    function mostrarMensaje() {
+        document.getElementById('pregunta').style.display = 'none';
+        document.getElementById('si').style.display = 'none';
+        document.getElementById('no').style.display = 'none';
+        document.getElementById('mensaje').innerHTML = '<h1>Gracias por esperarme tanto, te amo</h1>';
+        document.getElementById('mensaje').style.display = 'block';
+        // Pausa la reproducción de la música
+        document.getElementById('musica').pause();
+    }
+</script>
+
+</body>
+</html>
